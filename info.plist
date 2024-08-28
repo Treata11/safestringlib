@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+       <key>CFBundleName</key>
+       <string>SafeStringLib</string>
+       <key>CFBundleVersion</key>
+       <string>${CPACK_PACKAGE_VERSION}</string>
+       <key>CFBundleShortVersionString</key>
+       <string>${CPACK_PACKAGE_VERSION}</string>
+       <key>CFBundleIdentifier</key>
+       <string>com.intel.safestringlib</string>
+       <key>CFBundleExecutable</key>
+       <string>SafeStringLib</string>
+</dict>
+</plist>
+   

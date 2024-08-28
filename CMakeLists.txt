@@ -230,17 +230,30 @@ install(EXPORT ${PROJECT_NAME}Config DESTINATION share/${PROJECT_NAME}/cmake)
 
 export(TARGETS ${PROJECT_NAME}_shared FILE ${PROJECT_NAME}Config.cmake)
 
-# Debian package information for CPack
-set(CPACK_GENERATOR "DEB")
-set(CPACK_DEBIAN_PACKAGE_MAINTAINER "Intel")
-set(CPACK_PACKAGE_VERSION_MAJOR "${SAFEC_VERSION_MAJOR}")
-set(CPACK_PACKAGE_VERSION_MINOR "${SAFEC_VERSION_MINOR}")
-set(CPACK_PACKAGE_VERSION_PATCH "${SAFEC_VERSION_PATCH}")
-set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "SafeStringLib is an Intel enhanced version of the Safe C Library by Cisco.")
-set(CPACK_DEBIAN_FILE_NAME DEB-DEFAULT)
-set(CPACK_DEBIAN_PACKAGE_NAME "lib${PROJECT_NAME}")
-set(CPACK_DISPLAY_NAME "lib${PROJECT_NAME} run-time library")
-set(CPACK_PACKAGE_NAME "lib${PROJECT_NAME}")
-set(CPACK_DESCRIPTION "Safe String library and header files.")
-include(GNUInstallDirs)
-include(CPack)
+if(UNIX AND NOT APPLE)
+    # Debian package information for CPack
+    set(CPACK_GENERATOR "DEB")
+    set(CPACK_DEBIAN_PACKAGE_MAINTAINER "Intel")
+    set(CPACK_PACKAGE_VERSION_MAJOR "${SAFEC_VERSION_MAJOR}")
+    set(CPACK_PACKAGE_VERSION_MINOR "${SAFEC_VERSION_MINOR}")
+    set(CPACK_PACKAGE_VERSION_PATCH "${SAFEC_VERSION_PATCH}")
+    set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "SafeStringLib is an Intel enhanced version of the Safe C Library by Cisco.")
+    set(CPACK_DEBIAN_FILE_NAME DEB-DEFAULT)
+    set(CPACK_DEBIAN_PACKAGE_NAME "lib${PROJECT_NAME}")
+    set(CPACK_DISPLAY_NAME "lib${PROJECT_NAME} run-time library")
+    set(CPACK_PACKAGE_NAME "lib${PROJECT_NAME}")
+    set(CPACK_DESCRIPTION "Safe String library and header files.")
+    include(GNUInstallDirs)
+    include(CPack)
+    
+elseif(APPLE)
+    # Apple package information for CPack
+    set(CPACK_GENERATOR "Bundle;ZIP")
+    set(CPACK_BUNDLE_NAME "SafeStringLib")
+    set(CPACK_BUNDLE_PLIST "${CMAKE_CURRENT_SOURCE_DIR}/Info.plist")
+    set(CPACK_BUNDLE_ICON "${CMAKE_CURRENT_SOURCE_DIR}/intel.png")
+    include(CPack)
+
+endif()
+
+
